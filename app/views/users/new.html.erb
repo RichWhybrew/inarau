@@ -1,0 +1,16 @@
+<div class='centered'>
+	<h3>Let's set up your free account!</h3>
+	<form class='form-signin' action='/users' method='post'>
+		<%= token_tag nil %>
+		<label>Choose a username for others to see:</label>
+		<input class='form-control' type='text' name='user[username]'>
+		<label>Enter your email address:</label>
+		<input class='form-control' type='email' name='user[email]'>
+		<label>Choose a Password:</label>
+		<input class='form-control' type='password' name='user[password]'>
+		<label>Confirm Password:</label>
+		<input class='form-control' type='password' name='user[confirm_password]'>
+		<button class='btn btn-lg btn-primary btn-block' type='submit'>Register</button>
+	</form>
+	<a href='/sessions/new'>Already have an account? Click here to login!</a>
+</div>

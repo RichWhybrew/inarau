@@ -1,0 +1,2 @@
+class BeltsController < ApplicationController
+end

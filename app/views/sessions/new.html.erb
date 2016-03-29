@@ -1,0 +1,17 @@
+<div class='centered'>
+	<h3>Login</h3>
+	<% if flash[:login_errors] %>
+		<% flash[:login_errors].each do |e| %>
+			<p><%= e %></p>
+		<% end %>
+	<% end %>
+	<form class='form-signin' action='/sessions' method='post'>
+		<label>Email:</label><br>
+		<input class='form-control' type='email' name='email'><br>
+		<label>Password:</label><br>
+		<input class='form-control' type='password' name='password'><br>
+		<%= token_tag nil %>
+		<button class='btn btn-lg btn-primary btn-block' type='submit'>Register</button>
+	</form>
+	<a href='/users/new'>Don't have an account? Click Here to Register!</a>
+</div>

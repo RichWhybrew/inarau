@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  root 'sessions#index'
+  resources :sessions
+  resources :users
+  resources :languages
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

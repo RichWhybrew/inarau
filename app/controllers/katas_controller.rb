@@ -1,0 +1,2 @@
+class KatasController < ApplicationController
+end
