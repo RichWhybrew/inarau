@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160328232052) do
+ActiveRecord::Schema.define(version: 20160329232853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,13 +86,12 @@ ActiveRecord::Schema.define(version: 20160328232052) do
     t.string   "trans"
     t.integer  "language_id"
     t.integer  "category_id"
-    t.integer  "katum_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "kata_id"
   end
 
   add_index "vocabs", ["category_id"], name: "index_vocabs_on_category_id", using: :btree
-  add_index "vocabs", ["katum_id"], name: "index_vocabs_on_katum_id", using: :btree
   add_index "vocabs", ["language_id"], name: "index_vocabs_on_language_id", using: :btree
 
   add_foreign_key "akapens", "users"
@@ -103,6 +102,5 @@ ActiveRecord::Schema.define(version: 20160328232052) do
   add_foreign_key "scores", "languages"
   add_foreign_key "scores", "users"
   add_foreign_key "vocabs", "categories"
-  add_foreign_key "vocabs", "kata"
   add_foreign_key "vocabs", "languages"
 end

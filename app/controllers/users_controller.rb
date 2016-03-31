@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 			user[:admin] = 0
 		end
 		if user.save
-			session[:user_id] = User.last.user_id
+			session[:user_id] = User.last.id
 			redirect_to user_path(session[:user_id])
 		else
 			flash[:errors] = user.errors.full_messages

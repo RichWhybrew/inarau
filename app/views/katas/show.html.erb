@@ -1,1 +1,132 @@
-This is where users will perform kata
+<head>
+	<script type='text/javascript'>
+		$(document).ready(function(){
+			var answer = "";
+			var sounds = [];
+			var cache = [];
+			var x = 0;
+			var y = 0;
+			var count = 0;
+			function kill_js() {
+				throw new Error('Kill it with fire!');
+			}
+			$(document).on("click", ".audioButton", function(){
+				$(this).siblings()[2].play();
+			});
+			$('.testButton').on('click', function() {
+				sounds = ['<%= audio_tag 'A.m4a', id: 'Aa', autoplay: true %>', '<%= audio_tag 'I.m4a', id: 'Ia', autoplay: true %>', '<%= audio_tag 'U.m4a', id: 'Ua', autoplay: true %>'];
+				limit = sounds.length;
+				x = Math.floor((Math.random() * limit));
+				$('.centered').html('');
+				$('#sound_container').html(sounds[x]);
+			});
+			if(cache.length < 6) {
+				$(".kana").on('click', function() {
+					answer = $(this).attr('id');
+					answer = answer + "a";
+					question = $('#sound_container').children('audio').attr('id');
+					if(answer == question) {
+						cache.push(x);
+						$(this).siblings().css('background-color', 'white');
+						$(this).css('background-color', 'green');
+						if(cache.length == 6) {
+							$('.kana-wrapper').html("<div class='centered'><h2>Congratulations! You've completed your kata!</h2></div><div class='centered'><p><a class='btn btn-primary' href='/katas/0' role='button'>Yameru!</a></p>");
+						}
+						else {
+							setTimeout(function(){
+							sounds = ['<%= audio_tag 'A.m4a', id: 'Aa', autoplay: true %>', '<%= audio_tag 'I.m4a', id: 'Ia', autoplay: true %>', '<%= audio_tag 'U.m4a', id: 'Ua', autoplay: true %>'];
+							limit = sounds.length;
+							x = Math.floor((Math.random() * limit));
+							y = x;
+							while(x == y) {
+								x = Math.floor((Math.random() * limit));
+								count = 0;
+								for(var i = 0; i < cache.length; i++) {
+									if(cache[i] == x) {
+										count++;
+									}
+								}
+								if(count > 1) {
+									y = x;
+								}
+							}
+							$(".kana").css('background-color', 'white');
+							$('#sound_container').html(sounds[x]);
+							}, 2000);
+						}
+					}
+					else {
+						$(this).css('background-color', 'red');
+					}
+				});
+			}
+		});
+	</script>
+</head>	
+<% if @level == 'kihon' %>
+<div class='container theme-showcase' role='main'>
+	<audio autoplay><source src="/assets/audio/A.m4a"></audio>
+	<div class='jumbotron'>
+		<h3>First Kata: Hiragana</h3>
+		<p>Learning the hiragana is going to get you used to the 'sounds' of Japanese. It represents a complete syllabary, meaning it contains all the sounds you will find in the language. While learning hiragana, it's great to write out the characters by hand. However, we won't worry about that at this point. Your first goal is to be able to read, associating the sounds with their kana. This is SUPER important if you want to learn vocabulary, as it will get you thinking in Japanese rather than trying to translate to and from English everytime you hear a word. Take each of the three lessons below, then click 'Perform Kata' to show off your knowledge, earn your belt, and unlock the next section.</p>
+	</div>
+	<div class='centered'>
+		<p><a class="btn btn-primary" href="/katas/4" role="button">Perform Kata!</a></p>
+	</div>
+	<div class='row'>
+		<div class='col-lg-4'>
+			<h3>Movements 1-20</h3>
+			<p>The first 20 'movements' of your kata will be the first 20 kana. Good luck!</p>
+		</div>
+		<div class='col-lg-4'>
+			<h3>Movements 21-46</h3>
+			<p>Now let's learn 21-46. Almost there!</p>
+		</div>
+		<div class='col-lg-4'>
+			<h3>Variants</h3>
+			<p>Let's take a look at how we can make some other sounds to round out the syllabary.</p>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='col-lg-4'>
+			<p><a class="btn btn-primary" href="/katas/1" role="button">Hajime!</a></p>
+		</div>
+		<div class='col-lg-4'>
+			<p><a class="btn btn-primary" href="/katas/2" role="button">Hajime!</a></p>
+		</div>
+		<div class='col-lg-4'>
+			<p><a class="btn btn-primary" href="/katas/3" role="button">Hajime!</a></p>
+		</div>
+	</div>
+</div>
+<% end %>
+<% if @level == 'kihon-hiragana1' or @level == 'kihon-hiragana2' %>
+<div class='kana-wrapper'>
+	<% @vocab.each do |vocab| %>
+	<div class='kanas'>
+		<h1><%= vocab.native.html_safe %>;</h1>
+		<h4><%= vocab.trans %></h4>
+		<%= audio_tag vocab.trans + '.m4a', class: "audio-play" %>
+		<p class='butn btn-primary audioButton'>Listen</p>
+	</div>
+<% end %>
+</div>
+	<p><div class='centered'>
+		<p><a class="btn btn-primary" href="/katas/0" role="button">Got It!</a></p>
+	</div></p>
+<% end %>
+<% if @level == 'kata' %>
+<div id='sound_container'></div>
+<div class='centered'>
+		<p class="btn btn-primary testButton">Begin!</p>
+</div>
+<p></p>
+<div class='kana-wrapper'>
+	<% @vocab.each do |vocab| %>
+	<div class='kana' id="<%= vocab.trans %>">
+		<h1><%= vocab.native.html_safe %>;</h1>
+	</div>
+	<% end %>
+</div>
+<% end %>
+

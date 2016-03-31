@@ -17,6 +17,7 @@
 	width: 30%;
 	float: none;
 	margin: 0 auto;
+  text-align: center;
 }
 .form-signin {
   max-width: 330px;
@@ -51,4 +52,21 @@
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+.kana {
+	width: 19%;
+	display: inline-block;
+	border: 1px solid black;
+	text-align: center;
+}
+.kanas {
+  width: 19%;
+  display: inline-block;
+  border: 1px solid black;
+  text-align: center;
+}
+.kana-wrapper {
+	width: 90%;
+	float: none;
+	margin: 0 auto;
 }
