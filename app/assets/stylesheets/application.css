@@ -70,3 +70,10 @@
 	float: none;
 	margin: 0 auto;
 }
+#button-holder {
+  width: 64px;
+  height: 32px;
+  float: none;
+  margin: 0 auto;
+  text-align: center;
+}

@@ -17,7 +17,8 @@
 				sounds = ['<%= audio_tag 'A.m4a', id: 'Aa', autoplay: true %>', '<%= audio_tag 'I.m4a', id: 'Ia', autoplay: true %>', '<%= audio_tag 'U.m4a', id: 'Ua', autoplay: true %>'];
 				limit = sounds.length;
 				x = Math.floor((Math.random() * limit));
-				$('.centered').html('');
+				$('.centered').html('<p id="bow"><%= image_tag "bow.png" %></p>');
+				$('#button-holder').css('visibility', 'hidden');
 				$('#sound_container').html(sounds[x]);
 			});
 			if(cache.length < 6) {
@@ -27,9 +28,31 @@
 					question = $('#sound_container').children('audio').attr('id');
 					if(answer == question) {
 						cache.push(x);
+						if($('.centered').children(1).attr('id') == 'bow') {
+							$('.centered').html('<p id="punch"><%= image_tag "punch.png" %></p>');
+						}
+						else if ($('.centered').children(1).attr('id') == 'punch') {
+							$('.centered').html('<p id="kick"><%= image_tag "kick.png" %></p>');
+						}
+						else if ($('.centered').children(1).attr('id') == 'kick') {
+							$('.centered').html('<p id="block"><%= image_tag "block.png" %></p>');
+						}
+						else if ($('.centered').children(1).attr('id') == 'block') {
+							$('.centered').html('<p id="flamingo"><%= image_tag "flamingo.png" %></p>');
+						}
+						else if ($('.centered').children(1).attr('id') == 'flamingo') {
+							$('.centered').html('<p id="roundhouse"><%= image_tag "roundhouse.png" %></p>');
+						}
+						else if ($('.centered').children(1).attr('id') == 'roundhouse') {
+							$('.centered').html('<p id="punch"><%= image_tag "punch.png" %></p>');
+						}
+						else {
+							$('.centered').html('<p id="punch"><%= image_tag "punch.png" %></p>');
+						}
 						$(this).siblings().css('background-color', 'white');
 						$(this).css('background-color', 'green');
 						if(cache.length == 6) {
+							$('.centered').html('<p id="victory"><%= image_tag "victory.png" %></p>');
 							$('.kana-wrapper').html("<div class='centered'><h2>Congratulations! You've completed your kata!</h2></div><div class='centered'><p><a class='btn btn-primary' href='/katas/0' role='button'>Yameru!</a></p>");
 						}
 						else {
@@ -52,11 +75,17 @@
 							}
 							$(".kana").css('background-color', 'white');
 							$('#sound_container').html(sounds[x]);
-							}, 2000);
+							}, 1000);
 						}
 					}
 					else {
 						$(this).css('background-color', 'red');
+						if($('.centered').children(1).attr('id') != 'hit') {
+							$('.centered').html('<p id="hit"><%= image_tag "hit.png" %></p>');
+						}
+						else {
+							$('.centered').html('<p id="down"><%= image_tag "down.png" %></p>');
+						}
 					}
 				});
 			}
@@ -118,6 +147,9 @@
 <% if @level == 'kata' %>
 <div id='sound_container'></div>
 <div class='centered'>
+	<p><%= image_tag "ready.png" %></p>
+</div>
+<div id='button-holder'>
 		<p class="btn btn-primary testButton">Begin!</p>
 </div>
 <p></p>
