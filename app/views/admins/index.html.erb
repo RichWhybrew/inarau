@@ -1,0 +1,25 @@
+<div class='kana-wrapper'>
+	<table class='table table-striped table-bordered table-hover table-condensed'>
+		<tr>
+			<th>ID</th>
+			<th>Nihongo</th>
+			<th>Eigo</th>
+			<th>Category</th>
+			<th>CategoryID</th>
+			<th>Kata</th>
+			<th>KataID</th>
+		</tr>
+		<% @vocabs.each do |vocab| %>
+		<tr>
+			<td><%= vocab.id %></td>
+			<td><%= vocab.native %></td>
+			<td><%= vocab.trans %></td>
+			<td><%= vocab.category.name %></td>
+			<td><%= vocab.category.id %></td>
+			<td><%= vocab.kata.name %></td>
+			<td><%= vocab.kata.id %></td>
+		</tr>
+		<% end %>
+	</table>
+	<a href='/admins/new'>Add Vocab</a>
+</div>

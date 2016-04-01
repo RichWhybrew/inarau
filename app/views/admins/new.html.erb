@@ -1,0 +1,16 @@
+<div class='centered'>
+	<h3>Add vocab to the Database. You'd better be an admin!</h3>
+	<form class='form-signin' action='/vocabs' method='post'>
+		<%= token_tag nil %>
+		<label>Nihongo:</label>
+		<input class='form-control' type='text' name='native'>
+		<label>Eigo:</label>
+		<input class='form-control' type='text' name='trans'>
+		<label>Category -- If you don't know then don't upload!</label>
+		<input class='form-control' type='text' name='category'>
+		<label>Kata -- Please don't mess it up...</label>
+		<input class='form-control' type='text' name='kata'>
+		<button class='btn btn-lg btn-primary btn-block' type='submit'>Add Word</button>
+	</form>
+	<a href='/admins'>Go back without adding</a>
+</div>

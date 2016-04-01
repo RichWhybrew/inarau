@@ -54,7 +54,7 @@
   border-top-right-radius: 0;
 }
 .kana {
-	width: 19%;
+	width: 9%;
 	display: inline-block;
 	border: 1px solid black;
 	text-align: center;
@@ -76,4 +76,30 @@
   float: none;
   margin: 0 auto;
   text-align: center;
+}
+#invis {
+  display:none;
+}
+#topper {
+  background-color: #94A738;
+  color: #FFCB64;
+  border-radius: 4px;
+}
+.nav-link-color {
+  color: #F0F9A7;
+}
+.jimbo {
+  background-color:#F1FAC6;
+}
+.clikies {
+  background-image: none;
+  border: none;
+  background-color: #94A738;
+  color: #F1FAC6;
+}
+.choco {
+  color: #A06734;
+}
+.chocobu {
+  color: #743E0D;
 }

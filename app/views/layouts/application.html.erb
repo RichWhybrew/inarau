@@ -7,8 +7,8 @@
   <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js', 'http://getbootstrap.com/dist/js/bootstrap.min.js', 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-	<nav class="navbar navbar-inverse">
+<body class='jimbo'>
+	<nav class="navbar" id='topper'>
         	<div class="container">
 	          	<div class="navbar-header">
 	            	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,29 +17,31 @@
 		              	<span class="icon-bar"></span>
 		              	<span class="icon-bar"></span>
 		            </button>
-		            <a class="navbar-brand" href="/">Rainelement</a>
+		            <a class="navbar-brand nav-link-color" href="/">Rainelement</a>
 		        </div>
 	        	<div class="navbar-collapse collapse">
 	            	<ul class="nav navbar-nav">
-			        	<li><a href="/">Home</a></li>
-			            <li><a href="#about">About</a></li>
-			            <li><a href="#contact">Contact</a></li>
+			        	<li><a class=" nav-link-color" href="/">Home</a></li>
+			            <li><a class=" nav-link-color" href="#about">About</a></li>
+			            <li><a class=" nav-link-color" href="#contact">Contact</a></li>
 			            	<% if session[:user_id] %>
-			            <li><a href="/katas">Kata</a></li>
+			            <li><a class=" nav-link-color" href="/katas">Kata</a></li>
 			            <li class="dropdown">
-	                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+	                	<a href="#" class="dropdown-toggle nav-link-color" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
 	                	<ul class="dropdown-menu">
-	                	<li><a href="/users/<%= session[:user_id] %>">My Profile</a></li>
-	                  	<li><a href="/users/<%= session[:user_id] %>/edit">Update Account</a></li>
-	                  	<li><a href="/sessions/<%= session[:user_id] %>" data-method='delete'>Logout</a></li>
-	                  	<li><a href="#">Something else here</a></li>
+	                	<li><a class=" nav-link-color" href="/users/<%= session[:user_id] %>">My Profile</a></li>
+	                  	<li><a class=" nav-link-color" href="/users/<%= session[:user_id] %>/edit">Update Account</a></li>
+	                  	<li><a class=" nav-link-color" href="/sessions/<%= session[:user_id] %>" data-method='delete'>Logout</a></li>
+	                  		<% if User.find(session[:user_id]).admin == 1 %>
+	                  	<li><a class=" nav-link-color" href="/admins">Admin Dashboard</a></li>
+	                  		<% end %>
 	                  	<li role="separator" class="divider"></li>
 	                  	<li class="dropdown-header">Nav header</li>
-	                  	<li><a href="#">Separated link</a></li>
-	                  	<li><a href="#">One more separated link</a></li>
+	                  	<li><a class=" nav-link-color" href="#">Separated link</a></li>
+	                  	<li><a class=" nav-link-color" href="#">One more separated link</a></li>
 	                  		<% else %>
-	                  	<li><a href="/sessions/new">Login</a></li>
-	                  	<li><a href="/users/new">Register</a></li>
+	                  	<li><a class=" nav-link-color" href="/sessions/new">Login</a></li>
+	                  	<li><a class=" nav-link-color" href="/users/new">Register</a></li>
 	                  		<% end %>
 	                </ul>
 	              	</li>
