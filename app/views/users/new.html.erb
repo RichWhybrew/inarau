@@ -14,3 +14,10 @@
 	</form>
 	<a href='/sessions/new'>Already have an account? Click here to login!</a>
 </div>
+<div class='centered'>
+	<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+	<h5 class="errors"><%= error %></h5>
+	<% end %>
+	<% end %>
+</div>

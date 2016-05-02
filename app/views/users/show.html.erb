@@ -1,6 +1,45 @@
-<h1>Welcome <%= @user.username %></h1>
-<h2>You are currently a white belt in Japanese</h2>
-<h3>What would you like to practice today?</h3>
-<p>This is where I'll put a table listing 'kata' of different areas of the language to work on. Goes to vocabs#show</p>
-<p>This is where I'll give the user the option to view their scores so far. Goes to scores#show</p>
-<p>This is where I'll give user the option to view all scores. Goes to scores#index</p>
+<div class='container theme-showcase' role='main'>
+	<div class='jumbotron'>
+		<h1>Welcome <%= @user.username %></h1>
+		<h2>You are currently a <%= @user.belts.last.color %> in Japanese</h2>
+		<h3>What would you like to practice today?</h3>
+		<table class='table table-striped table-bordered table-hover table-condensed'>
+			<tr>
+				<th>Category</th>
+				<th>Attempted?</th>
+				<th>Perfected?</th>
+			</tr>
+			<tr>
+				<td><a href='/katas/0'>Kihon - Hiragana</a></td>
+				<% if @user.scores.where(kata: Kata.find(4)).count > 0 %>
+				<td>Pattern attempted <%= @user.scores.where(kata: Kata.find(4)).count %> times</td>
+				<td><%= @user.scores.where("score = 460 AND kata_id = 4").count %> perfect attempts</td>
+				<% else %>
+				<td>You haven't performed this kata yet!</td>
+				<td>You haven't performed this kata yet!</td>
+				<% end %>
+			</tr>
+			<tr>
+				<td><a href='/katakanas/5'>Kihon - Katakana</a></td>
+				<% if @user.scores.where(kata: Kata.find(8)).count > 0 %>
+				<td>Pattern attempted <%= @user.scores.where(kata: Kata.find(8)).count %> times</td>
+				<td><%= @user.scores.where("score = 460 AND kata_id = 8").count %> perfect attempts</td>
+				<% else %>
+				<td>You haven't performed this kata yet!</td>
+				<td>You haven't performed this kata yet!</td>
+				<% end %>
+			</tr>
+			<tr>
+				<td><a href='#'>Kihon - Animals</a></td>
+				<% if @user.scores.where(kata: Kata.find(9)).count > 0 %>
+				<td>Pattern attempted <%= @user.scores.where(kata: Kata.find(9)).count %> times</td>
+				<td><%= @user.scores.where("score = 460 AND kata_id = 9").count %> perfect attempts</td>
+				<% else %>
+				<td>You haven't performed this kata yet!</td>
+				<td>You haven't performed this kata yet!</td>
+				<% end %>
+			</tr>
+		</table>
+		<p>Curious about your fellow classmates? Click <a href='/scores'>here</a> to view the leaderboard!</p>
+	</div>
+</div>

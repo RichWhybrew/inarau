@@ -5,8 +5,9 @@
 	</div>
 </div>
 <div class='centered'>
-	<h3>Login to access the site</h3>
-	<a href='/sessions/new'>Login</a>
-	<h3>Register as a new user</h3>
-	<a href='/users/new'>Register</a>
+	<% if session[:user_id] %>
+	<a href='/users/<%= session[:user_id] %>'><%= image_tag "narau1.png" %></a>
+	<% else %>
+	<a href='/sessions/new'><%= image_tag "narau1.png" %></a>
+	<% end %>
 </div>

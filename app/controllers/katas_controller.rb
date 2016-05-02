@@ -15,9 +15,11 @@ class KatasController < ApplicationController
 			@level = 'kihon-hiragana2'
 		end
 		if params[:id] == 4.to_s
-			@vocab = Vocab.where(category: Category.find(3))
+			@vocab = Vocab.where(category: Category.find(3)).order(id: :asc)
 			@level = 'kata'
 		end
+	end
 
+	def new
 	end
 end

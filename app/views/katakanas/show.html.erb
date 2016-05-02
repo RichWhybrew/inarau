@@ -7,6 +7,7 @@
 			var x = 0;
 			var y = 0;
 			var count = 0;
+			var score = 0;
 			function kill_js() {
 				throw new Error('Kill it with fire!');
 			}
@@ -14,19 +15,22 @@
 				$(this).siblings()[2].play();
 			});
 			$('.testButton').on('click', function() {
-				sounds = ['<%= audio_tag 'A.m4a', id: 'Aa', autoplay: true %>', '<%= audio_tag 'I.m4a', id: 'Ia', autoplay: true %>', '<%= audio_tag 'U.m4a', id: 'Ua', autoplay: true %>'];
+				sounds = ['<%= audio_tag 'A.m4a', id: 'Aa', autoplay: true %>', '<%= audio_tag 'I.m4a', id: 'Ia', autoplay: true %>', '<%= audio_tag 'U.m4a', id: 'Ua', autoplay: true %>', '<%= audio_tag 'E.m4a', id: 'Ea', autoplay: true %>', '<%= audio_tag 'O.m4a', id: 'Oa', autoplay: true %>', '<%= audio_tag 'KA.m4a', id: 'KAa', autoplay: true %>', '<%= audio_tag 'KI.m4a', id: 'KIa', autoplay: true %>', '<%= audio_tag 'KU.m4a', id: 'KUa', autoplay: true %>', '<%= audio_tag 'KE.m4a', id: 'KEa', autoplay: true %>', '<%= audio_tag 'KO.m4a', id: 'KOa', autoplay: true %>', '<%= audio_tag 'SA.m4a', id: 'SAa', autoplay: true %>', '<%= audio_tag 'SHI.m4a', id: 'SHIa', autoplay: true %>', '<%= audio_tag 'SU.m4a', id: 'SUa', autoplay: true %>', '<%= audio_tag 'SE.m4a', id: 'SEa', autoplay: true %>', '<%= audio_tag 'SO.m4a', id: 'SOa', autoplay: true %>', '<%= audio_tag 'TA.m4a', id: 'TAa', autoplay: true %>', '<%= audio_tag 'CHI.m4a', id: 'CHIa', autoplay: true %>', '<%= audio_tag 'TSU.m4a', id: 'TSUa', autoplay: true %>', '<%= audio_tag 'TE.m4a', id: 'TEa', autoplay: true %>', '<%= audio_tag 'TO.m4a', id: 'TOa', autoplay: true %>', '<%= audio_tag 'NA.m4a', id: 'NAa', autoplay: true %>', '<%= audio_tag 'NI.m4a', id: 'NIa', autoplay: true %>', '<%= audio_tag 'NU.m4a', id: 'NUa', autoplay: true %>', '<%= audio_tag 'NE.m4a', id: 'NEa', autoplay: true %>', '<%= audio_tag 'NO.m4a', id: 'NOa', autoplay: true %>', '<%= audio_tag 'HA.m4a', id: 'HAa', autoplay: true %>', '<%= audio_tag 'HI.m4a', id: 'HIa', autoplay: true %>', '<%= audio_tag 'FU.m4a', id: 'FUa', autoplay: true %>', '<%= audio_tag 'HE.m4a', id: 'HEa', autoplay: true %>', '<%= audio_tag 'HO.m4a', id: 'HOa', autoplay: true %>', '<%= audio_tag 'MA.m4a', id: 'MAa', autoplay: true %>', '<%= audio_tag 'MI.m4a', id: 'MIa', autoplay: true %>', '<%= audio_tag 'MU.m4a', id: 'MUa', autoplay: true %>', '<%= audio_tag 'ME.m4a', id: 'MEa', autoplay: true %>', '<%= audio_tag 'MO.m4a', id: 'MOa', autoplay: true %>', '<%= audio_tag 'YA.m4a', id: 'YAa', autoplay: true %>', '<%= audio_tag 'YU.m4a', id: 'YUa', autoplay: true %>', '<%= audio_tag 'YO.m4a', id: 'YOa', autoplay: true %>', '<%= audio_tag 'RA.m4a', id: 'RAa', autoplay: true %>', '<%= audio_tag 'RI.m4a', id: 'RIa', autoplay: true %>', '<%= audio_tag 'RU.m4a', id: 'RUa', autoplay: true %>', '<%= audio_tag 'RE.m4a', id: 'REa', autoplay: true %>', '<%= audio_tag 'RO.m4a', id: 'ROa', autoplay: true %>', '<%= audio_tag 'WA.m4a', id: 'WAa', autoplay: true %>', '<%= audio_tag 'WO.m4a', id: 'WOa', autoplay: true %>', '<%= audio_tag 'N.m4a', id: 'Na', autoplay: true %>'];
 				limit = sounds.length;
 				x = Math.floor((Math.random() * limit));
 				$('.centered').html('<p id="bow"><%= image_tag "bow.png" %></p>');
 				$('#button-holder').css('visibility', 'hidden');
+				$('#score').html(score + 'pts');
 				$('#sound_container').html(sounds[x]);
 			});
-			if(cache.length < 6) {
+			if(cache.length < 47) {
 				$(".kana").on('click', function() {
 					answer = $(this).attr('id');
 					answer = answer + "a";
 					question = $('#sound_container').children('audio').attr('id');
 					if(answer == question) {
+						score += 10;
+						$('#score').html(score + 'pts');
 						cache.push(x);
 						if($('.centered').children(1).attr('id') == 'bow') {
 							$('.centered').html('<p id="punch"><%= image_tag "punch.png" %></p>');
@@ -52,12 +56,13 @@
 						$(this).siblings().css('background-color', '#F1FAC6');
 						$(this).css('background-color', 'green');
 						if(cache.length == 6) {
+							$.post('/scores', {score: score, user: <%= session[:user_id] %>, kata: 8});
 							$('.centered').html('<p id="victory"><%= image_tag "victory.png" %></p>');
-							$('.kana-wrapper').html("<div class='centered'><h2>Congratulations! You've completed your kata!</h2></div><div class='centered'><p><a class='btn btn-primary clikies' href='/katas/0' role='button'>Yameru!</a></p>");
+							$('.kana-wrapper').html("<div class='centered'><h2>Congratulations! You've completed your kata!</h2></div><div class='centered'><p><a class='btn btn-primary clikies' href='/katakanas/5' role='button'>Yameru!</a></p>");
 						}
 						else {
 							setTimeout(function(){
-							sounds = ['<%= audio_tag 'A.m4a', id: 'Aa', autoplay: true %>', '<%= audio_tag 'I.m4a', id: 'Ia', autoplay: true %>', '<%= audio_tag 'U.m4a', id: 'Ua', autoplay: true %>'];
+							sounds = ['<%= audio_tag 'A.m4a', id: 'Aa', autoplay: true %>', '<%= audio_tag 'I.m4a', id: 'Ia', autoplay: true %>', '<%= audio_tag 'U.m4a', id: 'Ua', autoplay: true %>', '<%= audio_tag 'E.m4a', id: 'Ea', autoplay: true %>', '<%= audio_tag 'O.m4a', id: 'Oa', autoplay: true %>', '<%= audio_tag 'KA.m4a', id: 'KAa', autoplay: true %>', '<%= audio_tag 'KI.m4a', id: 'KIa', autoplay: true %>', '<%= audio_tag 'KU.m4a', id: 'KUa', autoplay: true %>', '<%= audio_tag 'KE.m4a', id: 'KEa', autoplay: true %>', '<%= audio_tag 'KO.m4a', id: 'KOa', autoplay: true %>', '<%= audio_tag 'SA.m4a', id: 'SAa', autoplay: true %>', '<%= audio_tag 'SHI.m4a', id: 'SHIa', autoplay: true %>', '<%= audio_tag 'SU.m4a', id: 'SUa', autoplay: true %>', '<%= audio_tag 'SE.m4a', id: 'SEa', autoplay: true %>', '<%= audio_tag 'SO.m4a', id: 'SOa', autoplay: true %>', '<%= audio_tag 'TA.m4a', id: 'TAa', autoplay: true %>', '<%= audio_tag 'CHI.m4a', id: 'CHIa', autoplay: true %>', '<%= audio_tag 'TSU.m4a', id: 'TSUa', autoplay: true %>', '<%= audio_tag 'TE.m4a', id: 'TEa', autoplay: true %>', '<%= audio_tag 'TO.m4a', id: 'TOa', autoplay: true %>', '<%= audio_tag 'NA.m4a', id: 'NAa', autoplay: true %>', '<%= audio_tag 'NI.m4a', id: 'NIa', autoplay: true %>', '<%= audio_tag 'NU.m4a', id: 'NUa', autoplay: true %>', '<%= audio_tag 'NE.m4a', id: 'NEa', autoplay: true %>', '<%= audio_tag 'NO.m4a', id: 'NOa', autoplay: true %>', '<%= audio_tag 'HA.m4a', id: 'HAa', autoplay: true %>', '<%= audio_tag 'HI.m4a', id: 'HIa', autoplay: true %>', '<%= audio_tag 'FU.m4a', id: 'FUa', autoplay: true %>', '<%= audio_tag 'HE.m4a', id: 'HEa', autoplay: true %>', '<%= audio_tag 'HO.m4a', id: 'HOa', autoplay: true %>', '<%= audio_tag 'MA.m4a', id: 'MAa', autoplay: true %>', '<%= audio_tag 'MI.m4a', id: 'MIa', autoplay: true %>', '<%= audio_tag 'MU.m4a', id: 'MUa', autoplay: true %>', '<%= audio_tag 'ME.m4a', id: 'MEa', autoplay: true %>', '<%= audio_tag 'MO.m4a', id: 'MOa', autoplay: true %>', '<%= audio_tag 'YA.m4a', id: 'YAa', autoplay: true %>', '<%= audio_tag 'YU.m4a', id: 'YUa', autoplay: true %>', '<%= audio_tag 'YO.m4a', id: 'YOa', autoplay: true %>', '<%= audio_tag 'RA.m4a', id: 'RAa', autoplay: true %>', '<%= audio_tag 'RI.m4a', id: 'RIa', autoplay: true %>', '<%= audio_tag 'RU.m4a', id: 'RUa', autoplay: true %>', '<%= audio_tag 'RE.m4a', id: 'REa', autoplay: true %>', '<%= audio_tag 'RO.m4a', id: 'ROa', autoplay: true %>', '<%= audio_tag 'WA.m4a', id: 'WAa', autoplay: true %>', '<%= audio_tag 'WO.m4a', id: 'WOa', autoplay: true %>', '<%= audio_tag 'N.m4a', id: 'Na', autoplay: true %>'];
 							limit = sounds.length;
 							x = Math.floor((Math.random() * limit));
 							y = x;
@@ -69,7 +74,7 @@
 										count++;
 									}
 								}
-								if(count > 1) {
+								if(count > 0) {
 									y = x;
 								}
 							}
@@ -79,6 +84,8 @@
 						}
 					}
 					else {
+						score -= 10;
+						$('#score').html(score + 'pts');
 						$(this).css('background-color', 'red');
 						if($('.centered').children(1).attr('id') != 'hit') {
 							$('.centered').html('<p id="hit"><%= image_tag "hit.png" %></p>');
@@ -96,35 +103,35 @@
 <div class='container theme-showcase' role='main'>
 	<audio autoplay><source src="/assets/audio/A.m4a"></audio>
 	<div class='jumbotron'>
-		<h3>First Kata: Hiragana</h3>
-		<p>Learning the hiragana is going to get you used to the 'sounds' of Japanese. It represents a complete syllabary, meaning it contains all the sounds you will find in the language. While learning hiragana, it's great to write out the characters by hand. However, we won't worry about that at this point. Your first goal is to be able to read, associating the sounds with their kana. This is SUPER important if you want to learn vocabulary, as it will get you thinking in Japanese rather than trying to translate to and from English everytime you hear a word. Take each of the three lessons below, then click 'Perform Kata' to show off your knowledge, earn your belt, and unlock the next section.</p>
+		<h3>Second Kata: Katakana</h3>
+		<p>Mastering the katakana is the essential next step to learning Japanese. Katakana represent the same sounds as Hiragana, and you will notice some similarities with how they are written. You will see katakana used for words that are not native to Japan -- Think words like "Television" and "Computer." Take each of the three lessons below, then click 'Perform Kata' to test your knowledge.</p>
 	</div>
 	<div class='centered'>
-		<p><a class="btn btn-primary clikies" href="/katas/4" role="button">Perform Kata!</a></p>
+		<p><a class="btn btn-primary clikies" href="/katakanas/9" role="button">Perform Kata!</a></p>
 	</div>
 	<div class='row'>
 		<div class='col-lg-4'>
 			<div class='centered'>
 				<h3 class='chocobu'>1-20</h3>
-				<a class="btn btn-primary clikies" href="/katas/1" role="button">Hajime!</a>
+				<a class="btn btn-primary clikies" href="/katakanas/6" role="button">Hajime!</a>
 			</div>
 		</div>
 		<div class='col-lg-4'>
 			<div class='centered'>
 				<h3 class='chocobu'>21-46</h3>
-				<a class="btn btn-primary clikies" href="/katas/2" role="button">Hajime!</a>
+				<a class="btn btn-primary clikies" href="/katakanas/7" role="button">Hajime!</a>
 			</div>
 		</div>
 		<div class='col-lg-4'>
 			<div class='centered'>
 				<h3 class='chocobu'>Variants</h3>
-				<a class="btn btn-primary clikies" href="/katas/3" role="button">Hajime!</a>
+				<a class="btn btn-primary clikies" href="#" role="button">Hajime!</a>
 			</div>
 		</div>
 	</div>
 </div>
 <% end %>
-<% if @level == 'kihon-hiragana1' or @level == 'kihon-hiragana2' %>
+<% if @level == 'kihon-katakana1' or @level == 'kihon-katakana2' %>
 <div class='kana-wrapper'>
 	<% @vocab.each do |vocab| %>
 	<div class='kanas'>
@@ -136,7 +143,7 @@
 <% end %>
 </div>
 	<p><div class='centered'>
-		<p><a class="btn btn-primary clikies" href="/katas/0" role="button">Got It!</a></p>
+		<p><a class="btn btn-primary clikies" href="/katakanas/5" role="button">Got It!</a></p>
 	</div></p>
 <% end %>
 <% if @level == 'kata' %>
@@ -151,7 +158,7 @@
 <div class='kana-wrapper'>
 	<% @vocab.each do |vocab| %>
 	<div class='kana' id="<%= vocab.trans %>">
-		<h1><%= vocab.native.html_safe %>;</h1>
+		<h1><%= vocab.native %></h1>
 	</div>
 	<% end %>
 </div>

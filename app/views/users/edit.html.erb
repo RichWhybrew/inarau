@@ -1,0 +1,24 @@
+<div class='centered'>
+	<h3>Edit Your Account</h3>
+	<form class='form-signin' action='/users/<%= session[:user_id] %>' method='post'>
+		<%= token_tag nil %>
+		<label>Change username:</label>
+		<input class='form-control' type='text' name='user[username]' value='<%= @user.username %>'>
+		<label>Change your email address:</label>
+		<input class='form-control' type='email' name='user[email]' value='<%= @user.email %>'>
+		<label>Change your Password:</label>
+		<input class='form-control' type='password' name='user[password]'>
+		<label>Confirm new Password:</label>
+		<input class='form-control' type='password' name='user[confirm_password]'>
+		<input type='hidden' name='_method' value='patch'>
+		<button class='btn btn-lg btn-primary btn-block' type='submit'>Update</button>
+	</form>
+	<a href='/sessions/new'>Don't need to update? Click here to go to your homepage!</a>
+</div>
+<div class='centered'>
+	<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+	<h5 class="errors"><%= error %></h5>
+	<% end %>
+	<% end %>
+</div>

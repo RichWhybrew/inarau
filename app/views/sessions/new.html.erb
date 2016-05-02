@@ -15,3 +15,10 @@
 	</form>
 	<a href='/users/new'>Don't have an account? Click Here to Register!</a>
 </div>
+<div class='centered'>
+	<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+	<h5 class="errors"><%= error %></h5>
+	<% end %>
+	<% end %>
+</div>

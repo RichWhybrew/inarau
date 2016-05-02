@@ -17,28 +17,24 @@
 		              	<span class="icon-bar"></span>
 		              	<span class="icon-bar"></span>
 		            </button>
-		            <a class="navbar-brand nav-link-color" href="/">Rainelement</a>
+		            <a class="navbar-brand nav-link-color" href="/">I Narau</a>
 		        </div>
 	        	<div class="navbar-collapse collapse">
 	            	<ul class="nav navbar-nav">
-			        	<li><a class=" nav-link-color" href="/">Home</a></li>
-			            <li><a class=" nav-link-color" href="#about">About</a></li>
-			            <li><a class=" nav-link-color" href="#contact">Contact</a></li>
+	            		<% if session[:user_id] %>
+			        	<li><a class=" nav-link-color" href="/users/<%= session[:user_id] %>"><%= User.find(session[:user_id]).username %>'s Homepage</a></li>
+			        	<% end %>
+			            <li><a class=" nav-link-color" href="/sessions/1">About</a></li>
 			            	<% if session[:user_id] %>
 			            <li><a class=" nav-link-color" href="/katas">Kata</a></li>
 			            <li class="dropdown">
 	                	<a href="#" class="dropdown-toggle nav-link-color" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
 	                	<ul class="dropdown-menu">
-	                	<li><a class=" nav-link-color" href="/users/<%= session[:user_id] %>">My Profile</a></li>
 	                  	<li><a class=" nav-link-color" href="/users/<%= session[:user_id] %>/edit">Update Account</a></li>
 	                  	<li><a class=" nav-link-color" href="/sessions/<%= session[:user_id] %>" data-method='delete'>Logout</a></li>
 	                  		<% if User.find(session[:user_id]).admin == 1 %>
 	                  	<li><a class=" nav-link-color" href="/admins">Admin Dashboard</a></li>
 	                  		<% end %>
-	                  	<li role="separator" class="divider"></li>
-	                  	<li class="dropdown-header">Nav header</li>
-	                  	<li><a class=" nav-link-color" href="#">Separated link</a></li>
-	                  	<li><a class=" nav-link-color" href="#">One more separated link</a></li>
 	                  		<% else %>
 	                  	<li><a class=" nav-link-color" href="/sessions/new">Login</a></li>
 	                  	<li><a class=" nav-link-color" href="/users/new">Register</a></li>

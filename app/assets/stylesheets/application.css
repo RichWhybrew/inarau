@@ -103,3 +103,12 @@
 .chocobu {
   color: #743E0D;
 }
+#score-holder {
+  width: 64px;
+  height: 32px;
+  float: left;
+  text-align: center;
+}
+.errors {
+  color: red;
+}
