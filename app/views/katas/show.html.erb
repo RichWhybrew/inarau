@@ -55,7 +55,7 @@
 						}
 						$(this).siblings().css('background-color', '#F1FAC6');
 						$(this).css('background-color', 'green');
-						if(cache.length == 6) {
+						if(cache.length == 46) {
 							$.post('/scores', {score: score, user: <%= session[:user_id] %>, kata: 4});
 							$('.centered').html('<p id="victory"><%= image_tag "victory.png" %></p>');
 							$('.kana-wrapper').html("<div class='centered'><h2>Congratulations! You've completed your kata!</h2></div><div class='centered'><p><a class='btn btn-primary clikies' href='/katas/0' role='button'>Yameru!</a></p>");
